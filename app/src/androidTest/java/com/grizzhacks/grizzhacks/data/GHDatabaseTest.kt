@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4
 import com.grizzhacks.grizzhacks.MainActivity
 import com.grizzhacks.grizzhacks.announcements.Announcement
 import com.grizzhacks.grizzhacks.announcements.AnnouncementDAO
+import com.grizzhacks.grizzhacks.events.Event
+import com.grizzhacks.grizzhacks.events.EventDAO
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -22,6 +24,7 @@ import java.util.*
 class GHDatabaseTest {
     private lateinit var database: GHDatabase
     private lateinit var announcementDao: AnnouncementDAO
+    private lateinit var eventDao: EventDAO
 
     @JvmField @Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
     @JvmField @Rule val mainActivity = ActivityTestRule<MainActivity>(MainActivity::class.java)
@@ -31,6 +34,7 @@ class GHDatabaseTest {
         val context = mainActivity.activity
         database = Room.inMemoryDatabaseBuilder(context, GHDatabase::class.java).allowMainThreadQueries().build()
         announcementDao = database.announcementDao()
+        eventDao = database.eventDao()
     }
 
     @After
@@ -49,5 +53,18 @@ class GHDatabaseTest {
         announcementDao.getAll()
                 .test()
                 .assertValue(listOf(testAnnouncement))
+    }
+
+    @Test
+    fun writeReadEvent() {
+        val testEvent = Event("TEST_EVENT")
+
+        val ids = eventDao.insert(listOf(testEvent))
+        assertEquals(1, ids.size)
+        testEvent.id = ids.first()
+
+        eventDao.getAll()
+                .test()
+                .assertValue(listOf(testEvent))
     }
 }
