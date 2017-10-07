@@ -10,19 +10,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.grizzhacks.grizzhacks.R
+import com.grizzhacks.grizzhacks.core.EntityController
+import com.grizzhacks.grizzhacks.core.EntityPresenter
+import com.grizzhacks.grizzhacks.core.EntityPresenterImpl
 import com.grizzhacks.grizzhacks.hide
 import com.grizzhacks.grizzhacks.show
 
 /**
  * Fragment displays a list of accounts.
  */
-class AnnouncementFragment: Fragment(), AnnouncementController {
+class AnnouncementFragment: Fragment(), EntityController<Announcement> {
     private lateinit var root: View
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
     private val adapter = AnnouncementAdapter()
-    private val presenter: AnnouncementPresenter by lazy { AnnouncementPresenterImpl(this, AnnouncementInteractorImpl(context)) }
+    private val presenter: EntityPresenter by lazy { EntityPresenterImpl(this, AnnouncementInteractor(context)) }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_announcement, container, false)
@@ -40,8 +43,8 @@ class AnnouncementFragment: Fragment(), AnnouncementController {
         return view
     }
 
-    override fun onFetched(announcements: List<Announcement>) {
-        adapter.items = announcements
+    override fun onFetched(entities: List<Announcement>) {
+        adapter.items = entities
     }
 
     override fun onError(e: Throwable) {
