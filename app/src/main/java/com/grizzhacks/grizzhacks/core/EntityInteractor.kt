@@ -1,6 +1,5 @@
 package com.grizzhacks.grizzhacks.core
 
-import com.grizzhacks.grizzhacks.announcements.Announcement
 import io.reactivex.Flowable
 
 

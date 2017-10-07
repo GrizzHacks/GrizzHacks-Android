@@ -5,7 +5,6 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import android.util.EventLog
 import com.grizzhacks.grizzhacks.announcements.Announcement
 import com.grizzhacks.grizzhacks.announcements.AnnouncementDAO
 import com.grizzhacks.grizzhacks.events.Event
