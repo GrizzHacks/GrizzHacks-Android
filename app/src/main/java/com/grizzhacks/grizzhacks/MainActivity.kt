@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.grizzhacks.grizzhacks.announcements.AnnouncementFragment
+import com.grizzhacks.grizzhacks.events.EventFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -63,6 +64,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction()
                         .add(R.id.container, AnnouncementFragment.newInstance(), AnnouncementFragment.FRAGMENT_NAME)
                         .addToBackStack(AnnouncementFragment.FRAGMENT_NAME)
+                        .commit()
+            }
+            R.id.nav_events -> {
+                supportFragmentManager.beginTransaction()
+                        .add(R.id.container, EventFragment.newInstance(), EventFragment.FRAGMENT_NAME)
+                        .addToBackStack(EventFragment.FRAGMENT_NAME)
                         .commit()
             }
         }

@@ -1,7 +1,6 @@
 package com.grizzhacks.grizzhacks.announcements
 
 import android.content.Context
-import com.grizzhacks.grizzhacks.data.GHDatabase
 import io.reactivex.Flowable
 
 /**

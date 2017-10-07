@@ -1,4 +1,4 @@
-package com.grizzhacks.grizzhacks.announcements
+package com.grizzhacks.grizzhacks.events
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -6,7 +6,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Presenter that retrieves and handles fetching announcements.
  */
-class AnnouncementPresenterImpl(private var controller: AnnouncementController?, private val interactor: AnnouncementInteractor) : AnnouncementPresenter {
+class EventPresenterImpl(private var controller: EventController?, private val interactor: EventInteractor) : EventPresenter {
     override fun fetch() {
         controller?.showProgress()
         interactor.fetch()
